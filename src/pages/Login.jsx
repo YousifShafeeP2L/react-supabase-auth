@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import supabase from "../helper/supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
+import supabase from "../utils/supabaseClient";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function Login() {
     }
 
     if (data) {
-      navigate("/dashboard");
+      navigate("/");
       return null;
     }
   };
@@ -52,8 +52,10 @@ function Login() {
         />
         <button type="submit">Log in</button>
       </form>
-      <span>Don't have an account?</span>
+      <span>Don't have an account? </span>
       <Link to="/register">Register.</Link>
+      <br></br>
+      <Link to="/forget-password">Forget Password?</Link>
     </div>
   );
 }
