@@ -1,36 +1,51 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./guard/ProtectedRoute";
+import PublicRoute from "./guard/PublicRoute";
+import ForgetPassword from "./pages/ForgetPassword";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Wrapper from "./pages/Wrapper";
+import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* home */}
-        <Route path="/" element={<Home />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
 
-        {/* register */}
-        <Route path="/register" element={<Register />} />
+          <Route path="/register" element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          } />
 
-        {/* login */}
-        <Route path="/login" element={<Login />} />
+          <Route path="/login" element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          } />
 
-        {/* dashboard */}
-        <Route
-          path="/dashboard"
-          element={
-            <Wrapper>
-              <Dashboard />
-            </Wrapper>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/forget-password" element={
+            <PublicRoute>
+              <ForgetPassword />
+            </PublicRoute>
+          } />
+
+          <Route path="/reset-password" element={
+            <ResetPassword />
+          } />
+
+        </Routes>
+      </BrowserRouter >
+    </AuthProvider>
   );
 }
 
