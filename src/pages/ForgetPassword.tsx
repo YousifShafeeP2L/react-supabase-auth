@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import supabase from "../utils/supabaseClient";
 
 const ForgetPassword = () => {
@@ -8,7 +9,7 @@ const ForgetPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: import.meta.env.VITE_RESET_PASSWORD_REDIRECT_URL
+            redirectTo: import.meta.env.VITE_RESET_URL
         });
         if (error) {
             setMessage(error.message);
@@ -23,6 +24,7 @@ const ForgetPassword = () => {
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <button type="submit">Send Reset Link</button>
         </form>
+        <Link to="/login">Back to Login</Link>
     </div>;
 };
 
