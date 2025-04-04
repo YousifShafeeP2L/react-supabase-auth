@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./guard/ProtectedRoute";
 import PublicRoute from "./guard/PublicRoute";
+import ChangeUsername from "./pages/ChangeUsername";
 import ForgetPassword from "./pages/ForgetPassword";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -18,6 +19,12 @@ function App() {
           <Route path="/" element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/change-username" element={
+            <ProtectedRoute>
+              <ChangeUsername />
             </ProtectedRoute>
           } />
 

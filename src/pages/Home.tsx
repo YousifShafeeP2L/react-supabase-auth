@@ -27,7 +27,7 @@ function Home() {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const { data, error } = await supabase.from("TodoList").select("*");
+      const { data, error } = await supabase.from("test").select("*");
       if (error) {
         console.log("Error fetching: ", error);
       } else {
@@ -128,6 +128,7 @@ function Home() {
         </ul>
       </div>
       <button onClick={signOut}>Sign out</button>
+      <button onClick={() => navigate("/change-username")}>Change Username</button>
     </div>
   );
 }
